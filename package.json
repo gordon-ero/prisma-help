@@ -1,17 +1,18 @@
 {
   "name": "@ero-software/db-accessor-lib",
-  "version": "1.0.6",
+  "version": "1.0.9",
   "description": "db accessor for prisma",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rm -rf dist && tsc && mkdir -p dist/crms/prisma && ncp src/crms/prisma/schema_example.prisma dist/crms/prisma/schema_example.prisma && ncp ./prisma-generate-build.sh dist/prisma-generate-build.sh && chmod +x ./dist/prisma-generate-build.sh && ./dist/prisma-generate-build.sh && node ./dist/crms/index.js",
-    "pubs": "rm -rf dist && tsc && ncp src/crms/prisma dist/crms/prisma && npm publish"
+    "build": "rm -rf dist && tsc && cp post-install.sh dist/",
+    "pubs": "rm -rf dist && tsc && cp post-install.sh dist/ && npm publish"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ero-software/prisma-das-client": "^0.0.2",
     "@prisma/client": "^5.7.1",
     "prisma": "^5.7.1"
   },

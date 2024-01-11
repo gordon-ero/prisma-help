@@ -1,28 +1,12 @@
-import { PrismaClient as PrismaClientExample } from "./prisma/generated/client_example";
+import { PrismaClient as PrismaClientDas } from "@ero-software/prisma-das-client";
 
-// Assuming PrismaClientExample is correctly imported from the generated client
-console.log("PrismaClientExample", PrismaClientExample);
-const prismExample = new PrismaClientExample({
-  log: ["query", "info", "warn", "error"],
-});
-console.log("prismExample", prismExample);
-prismExample.notes.findFirst().then((res) => {
-  console.log("res", res);
-});
+const prismaDas = new PrismaClientDas();
 
-// Define a type for dbMap
-interface DbMap {
-  [companyId: string]: PrismaClientExample;
-}
-
-const dbMap: DbMap = {
-  "09c23ceb-5f24-4604-8e07-a09d3d352d38": prismExample,
+const dbMap: Record<string, PrismaClientDas> = {
+  "09c23ceb-5f24-4604-8e07-a09d3d352d38": prismaDas,
 };
 
-export function getDb(companyId: string): PrismaClientExample | null {
-  const db = dbMap[companyId];
-  if (!db) {
-    return null;
-  }
-  return db;
+export function getPrisma(id: string) {
+  if(!dbMap[id]) throw new Error(`No Prisma Client found for ${id}`);
+  return dbMap[id];
 }

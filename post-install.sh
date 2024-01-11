@@ -1,0 +1,1 @@
+npx prisma generate --schema node_modules/@ero-software/prisma-das-client/schema.prisma
